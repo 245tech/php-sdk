@@ -26,10 +26,9 @@ class AccountService extends BaseService {
      */
     public function getVerifiedEmailAddresses($accessToken, Array $params = array()) {
         $baseUrl = Config::get('endpoints.base_url') . Config::get('endpoints.account_verified_addresses');
-        $request = parent::sendRequestWithoutBody($accessToken, 'GET', $baseUrl, $params);
-
+        
         try {
-            $response = parent::getClient()->send($request);
+            $response = parent::sendRequestWithoutBody($accessToken, 'GET', $baseUrl, $params);
         } catch (TransferException $e) {
             throw parent::convertException($e);
         }
@@ -52,10 +51,9 @@ class AccountService extends BaseService {
      */
     public function createVerifiedEmailAddress($accessToken, $emailAddress) {
         $baseUrl = Config::get('endpoints.base_url') . Config::get('endpoints.account_verified_addresses');
-        $request = parent::sendRequestWithBody($accessToken, 'POST', $baseUrl, array(array("email_address" => $emailAddress)));
-
+        
         try {
-            $response = parent::getClient()->send($request);
+            $response = parent::sendRequestWithBody($accessToken, 'POST', $baseUrl, array(array("email_address" => $emailAddress)));
         } catch (TransferException $e) {
             throw parent::convertException($e);
         }
@@ -77,10 +75,8 @@ class AccountService extends BaseService {
     public function getAccountInfo($accessToken) {
         $baseUrl = Config::get('endpoints.base_url') . Config::get('endpoints.account_info');
 
-        $request = parent::sendRequestWithoutBody($accessToken, 'GET', $baseUrl);
-
         try {
-            $response = parent::getClient()->send($request);
+            $response = parent::sendRequestWithoutBody($accessToken, 'GET', $baseUrl);
         } catch (TransferException $e) {
             throw parent::convertException($e);
         }
@@ -98,10 +94,8 @@ class AccountService extends BaseService {
     public function updateAccountInfo($accessToken, AccountInfo $accountInfo) {
         $baseUrl = Config::get('endpoints.base_url') . Config::get('endpoints.account_info');
 
-        $request = parent::sendRequestWithBody($accessToken, 'PUT', $baseUrl, $accountInfo);
-
         try {
-            $response = parent::getClient()->send($request);
+            $response = parent::sendRequestWithBody($accessToken, 'PUT', $baseUrl, $accountInfo);
         } catch (TransferException $e) {
             throw parent::convertException($e);
         }
